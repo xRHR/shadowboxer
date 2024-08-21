@@ -67,15 +67,13 @@ class Program
                         // Chat - содержит всю информацию о чате
                         var chat = message.Chat;
 
-                        if (user.Id == 1076587352 || user.Username == "Bayas_Dambaev")
-                        {
-                            //await botClient.SendTextMessageAsync(
-                            //    chat.Id,
-                            //    "Русич в чате",
-                            //    replyToMessageId: message.MessageId
-                            //    );
+                        //await botClient.SendTextMessageAsync(
+                        //    chat.Id,
+                        //    "Русич в чате",
+                        //    replyToMessageId: message.MessageId
+                        //    );
+                        if (message.Text.ToLower().Contains("русич"))
                             await botClient.SendAnimationAsync(chatId: chat.Id, animation: InputFile.FromUri("https://i.imgur.com/WoZkvmu.mp4"));
-                        }
                         return;
                     }
             }
