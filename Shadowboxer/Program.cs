@@ -67,21 +67,19 @@ class Program
                         // Chat - содержит всю информацию о чате
                         var chat = message.Chat;
 
+
                         if (user.Username == "a183949526" || user.Username == "Bayas_Dambaev")
                         {
                             await botClient.SendTextMessageAsync(
                                 chat.Id,
                                 "Русич в чате",
-                                replyToMessageId: message.MessageId // по желанию можем поставить этот параметр, отвечающий за "ответ" на сообщение
+                                replyToMessageId: message.MessageId
                                 );
+                            await botClient.SendAnimationAsync(chatId: chat.Id, animation: InputFile.FromString("https://web.telegram.org/79c6a960-be99-4db5-a062-d1bbcbca6d64"));
                         }
                         else
                         {
-                            await botClient.SendTextMessageAsync(
-                                chat.Id,
-                                "Не русич в чате",
-                                replyToMessageId: message.MessageId // по желанию можем поставить этот параметр, отвечающий за "ответ" на сообщение
-                                );
+                            
                         }
                         return;
                     }
