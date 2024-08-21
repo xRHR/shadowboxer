@@ -62,7 +62,7 @@ class Program
                         var user = message.From;
 
                         // Выводим на экран то, что пишут нашему боту, а также небольшую информацию об отправителе
-                        Console.WriteLine($"{user.FirstName} ({user.Id}) написал сообщение: {message.Text}");
+                        Console.WriteLine($"{user.FirstName} @{user.Username} написал сообщение: {message.Text}");
 
                         // Chat - содержит всю информацию о чате
                         var chat = message.Chat;
