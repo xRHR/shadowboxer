@@ -62,12 +62,12 @@ class Program
                         var user = message.From;
 
                         // Выводим на экран то, что пишут нашему боту, а также небольшую информацию об отправителе
-                        Console.WriteLine($"{user.FirstName} @{user.Id} написал сообщение: {message.Text}");
+                        Console.WriteLine($"{user.FirstName} @{user.Username} id={user.Id} написал сообщение: {message.Text}");
 
                         // Chat - содержит всю информацию о чате
                         var chat = message.Chat;
 
-                        if (user.Username == "a183949526" || user.Username == "Bayas_Dambaev")
+                        if (user.Username == "a18394952" || user.Username == "Bayas_Dambaev")
                         {
                             //await botClient.SendTextMessageAsync(
                             //    chat.Id,
