@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Shadowboxer": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
