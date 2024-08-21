@@ -62,20 +62,20 @@ class Program
                         var user = message.From;
 
                         // Выводим на экран то, что пишут нашему боту, а также небольшую информацию об отправителе
-                        Console.WriteLine($"{user.FirstName} @{user.Username} написал сообщение: {message.Text}");
+                        Console.WriteLine($"{user.FirstName} @{user.Id} написал сообщение: {message.Text}");
 
                         // Chat - содержит всю информацию о чате
                         var chat = message.Chat;
 
                         if (user.Username == "a183949526" || user.Username == "Bayas_Dambaev")
-
+                        {
                             //await botClient.SendTextMessageAsync(
                             //    chat.Id,
                             //    "Русич в чате",
                             //    replyToMessageId: message.MessageId
                             //    );
                             await botClient.SendAnimationAsync(chatId: chat.Id, animation: InputFile.FromUri("https://i.imgur.com/WoZkvmu.mp4"));
-
+                        }
                         return;
                     }
             }
