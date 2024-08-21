@@ -67,7 +67,7 @@ class Program
                         // Chat - содержит всю информацию о чате
                         var chat = message.Chat;
 
-                        if (user.Username == "a183949526")
+                        if (user.Username == "a183949526" || user.Username == "Bayas_Dambaev")
                         {
                             await botClient.SendTextMessageAsync(
                                 chat.Id,
