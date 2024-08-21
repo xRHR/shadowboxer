@@ -55,7 +55,23 @@ class Program
             {
                 case UpdateType.Message:
                     {
-                        Console.WriteLine("Пришло сообщение!");
+                        // эта переменная будет содержать в себе все связанное с сообщениями
+                        var message = update.Message;
+
+                        // From - это от кого пришло сообщение (или любой другой Update)
+                        var user = message.From;
+
+                        // Выводим на экран то, что пишут нашему боту, а также небольшую информацию об отправителе
+                        Console.WriteLine($"{user.FirstName} ({user.Id}) написал сообщение: {message.Text}");
+
+                        // Chat - содержит всю информацию о чате
+                        var chat = message.Chat;
+                        await botClient.SendTextMessageAsync(
+                            chat.Id,
+                            message.Text, // отправляем то, что написал пользователь
+                            replyToMessageId: message.MessageId // по желанию можем поставить этот параметр, отвечающий за "ответ" на сообщение
+                            );
+
                         return;
                     }
             }
