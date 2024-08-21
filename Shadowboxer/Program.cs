@@ -68,19 +68,14 @@ class Program
                         var chat = message.Chat;
 
 
-                        if (user.Username == "a183949526" || user.Username == "Bayas_Dambaev")
-                        {
+
                             await botClient.SendTextMessageAsync(
                                 chat.Id,
                                 "Русич в чате",
                                 replyToMessageId: message.MessageId
                                 );
                             await botClient.SendAnimationAsync(chatId: chat.Id, animation: InputFile.FromUri("https://web.telegram.org/79c6a960-be99-4db5-a062-d1bbcbca6d64"));
-                        }
-                        else
-                        {
-                            
-                        }
+
                         return;
                     }
             }
