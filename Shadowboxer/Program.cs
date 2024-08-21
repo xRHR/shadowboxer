@@ -75,7 +75,7 @@ class Program
                                 "Русич в чате",
                                 replyToMessageId: message.MessageId
                                 );
-                            await botClient.SendAnimationAsync(chatId: chat.Id, animation: InputFile.FromString("https://web.telegram.org/79c6a960-be99-4db5-a062-d1bbcbca6d64"));
+                            await botClient.SendAnimationAsync(chatId: chat.Id, animation: InputFile.FromUri("https://web.telegram.org/79c6a960-be99-4db5-a062-d1bbcbca6d64"));
                         }
                         else
                         {
