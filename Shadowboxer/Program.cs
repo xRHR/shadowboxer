@@ -66,12 +66,23 @@ class Program
 
                         // Chat - содержит всю информацию о чате
                         var chat = message.Chat;
-                        await botClient.SendTextMessageAsync(
-                            chat.Id,
-                            message.Text, // отправляем то, что написал пользователь
-                            replyToMessageId: message.MessageId // по желанию можем поставить этот параметр, отвечающий за "ответ" на сообщение
-                            );
 
+                        if (user.Username == "a183949526")
+                        {
+                            await botClient.SendTextMessageAsync(
+                                chat.Id,
+                                "Русич в чате",
+                                replyToMessageId: message.MessageId // по желанию можем поставить этот параметр, отвечающий за "ответ" на сообщение
+                                );
+                        }
+                        else
+                        {
+                            await botClient.SendTextMessageAsync(
+                                chat.Id,
+                                "Не русич в чате",
+                                replyToMessageId: message.MessageId // по желанию можем поставить этот параметр, отвечающий за "ответ" на сообщение
+                                );
+                        }
                         return;
                     }
             }
