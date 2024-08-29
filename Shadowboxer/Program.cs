@@ -38,28 +38,15 @@ class Program
         using var cts = new CancellationTokenSource();
 
 
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            db.Users.Add(new Shadowboxer.Models.User(1740508533));
-            db.SaveChanges();
-        }
-        using (ApplicationContext db = new ApplicationContext())
-        {
-            var users = db.Users.ToList();
 
-            foreach (var user in users)
-            {
-                Console.WriteLine(user.Id);
-            }
-        }
-        //// UpdateHander - обработчик приходящих Update`ов
-        //// ErrorHandler - обработчик ошибок, связанных с Bot API
-        //_botClient.StartReceiving(UpdateHandler, ErrorHandler, _receiverOptions, cts.Token); // Запускаем бота
+        // UpdateHander - обработчик приходящих Update`ов
+        // ErrorHandler - обработчик ошибок, связанных с Bot API
+        _botClient.StartReceiving(UpdateHandler, ErrorHandler, _receiverOptions, cts.Token); // Запускаем бота
 
-        //var me = await _botClient.GetMeAsync(); // Создаем переменную, в которую помещаем информацию о нашем боте.
-        //Console.WriteLine($"{me.FirstName} запущен!");
+        var me = await _botClient.GetMeAsync(); // Создаем переменную, в которую помещаем информацию о нашем боте.
+        Console.WriteLine($"{me.FirstName} запущен!");
 
-        //await Task.Delay(-1); // Устанавливаем бесконечную задержку, чтобы наш бот работал постоянно
+        await Task.Delay(-1); // Устанавливаем бесконечную задержку, чтобы наш бот работал постоянно
     }
     private static async Task UpdateHandler(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {
@@ -82,14 +69,20 @@ class Program
 
                         // Chat - содержит всю информацию о чате
                         var chat = message.Chat;
+                        using (ApplicationContext db = new ApplicationContext())
+                        {
+                            db.Users.Add(new Shadowboxer.Models.User(1740508533));
+                            db.SaveChanges();
+                        }
+                        using (ApplicationContext db = new ApplicationContext())
+                        {
+                            var users = db.Users.ToList();
 
-                        //await botClient.SendTextMessageAsync(
-                        //    chat.Id,
-                        //    "Русич в чате",
-                        //    replyToMessageId: message.MessageId
-                        //    );
-                        if (message.Text is string text && text.Contains("русич", StringComparison.CurrentCultureIgnoreCase))
-                            await botClient.SendAnimationAsync(chatId: chat.Id, animation: InputFile.FromUri("https://i.imgur.com/WoZkvmu.mp4"));
+                            foreach (var usr in users)
+                            {
+                                Console.WriteLine(usr.Id);
+                            }
+                        }
                         return;
                     }
             }
