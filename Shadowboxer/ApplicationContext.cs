@@ -53,7 +53,9 @@ namespace Shadowboxer
                 throw new Exception("Configuration error:\n" + err_msg);
             }
 
-            optionsBuilder.UseNpgsql($"Host={host};Database={name};Username={user};Password={pswd}");
+            string conn_str = $"Host={host};Database={name};Username={user};Password={pswd}";
+            Console.WriteLine(conn_str);
+            optionsBuilder.UseNpgsql(conn_str);
         }
     }
 }
