@@ -26,10 +26,10 @@ namespace Shadowboxer
                 .AddJsonFile("appconfig.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            string? host = app_cfg["db.host"];
-            string? name = app_cfg["db.name"];
-            string? user = app_cfg["db.user"];
-            string? pswd = app_cfg["db.pswd"];
+            string? host = app_cfg["db:host"];
+            string? name = app_cfg["db:name"];
+            string? user = app_cfg["db:user"];
+            string? pswd = app_cfg["db:pswd"];
 
             if (string.IsNullOrEmpty(host))
             {
