@@ -57,10 +57,10 @@ class Program
                     {
                         // эта переменная будет содержать в себе все связанное с сообщениями
                         var message = update.Message;
-
+                        if (message is null) return;
                         // From - это от кого пришло сообщение (или любой другой Update)
                         var user = message.From;
-
+                        if (user is null) return;
                         // Выводим на экран то, что пишут нашему боту, а также небольшую информацию об отправителе
                         Console.WriteLine($"{user.FirstName} @{user.Username} id={user.Id} написал сообщение: {message.Text}");
 
@@ -72,15 +72,31 @@ class Program
                         //    "Русич в чате",
                         //    replyToMessageId: message.MessageId
                         //    );
-                        if (message.Text.ToLower().Contains("русич"))
+                        if (message.Text is string text && text.Contains("русич", StringComparison.CurrentCultureIgnoreCase))
                             await botClient.SendAnimationAsync(chatId: chat.Id, animation: InputFile.FromUri("https://i.imgur.com/WoZkvmu.mp4"));
                         return;
                     }
             }
         }
-        catch (Exception ex)
+        catch (Exception ex1)
         {
-            Console.WriteLine(ex.ToString());
+            try
+            {
+                Console.WriteLine(ex1.ToString());
+                if (update.Message is not null)
+                {
+                    await botClient.SendTextMessageAsync(
+                        update.Message.Chat.Id,
+                        ex1.Message,
+                        replyToMessageId: update.Message.MessageId
+                    );
+                }
+            }
+            catch (Exception ex2)
+            {
+                Console.WriteLine("Exception in catch block!!!");
+                Console.WriteLine(ex2.ToString());
+            }
         }
     }
 
