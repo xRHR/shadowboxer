@@ -3,6 +3,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
+using Shadowboxer;
 
 class Program
 {
@@ -36,14 +37,29 @@ class Program
 
         using var cts = new CancellationTokenSource();
 
-        // UpdateHander - обработчик приходящих Update`ов
-        // ErrorHandler - обработчик ошибок, связанных с Bot API
-        _botClient.StartReceiving(UpdateHandler, ErrorHandler, _receiverOptions, cts.Token); // Запускаем бота
 
-        var me = await _botClient.GetMeAsync(); // Создаем переменную, в которую помещаем информацию о нашем боте.
-        Console.WriteLine($"{me.FirstName} запущен!");
+        using (ApplicationContext db = new ApplicationContext())
+        {
+            db.Users.Add(new Shadowboxer.Models.User(1740508533));
+            db.SaveChanges();
+        }
+        using (ApplicationContext db = new ApplicationContext())
+        {
+            var users = db.Users.ToList();
 
-        await Task.Delay(-1); // Устанавливаем бесконечную задержку, чтобы наш бот работал постоянно
+            foreach (var user in users)
+            {
+                Console.WriteLine(user.Id);
+            }
+        }
+        //// UpdateHander - обработчик приходящих Update`ов
+        //// ErrorHandler - обработчик ошибок, связанных с Bot API
+        //_botClient.StartReceiving(UpdateHandler, ErrorHandler, _receiverOptions, cts.Token); // Запускаем бота
+
+        //var me = await _botClient.GetMeAsync(); // Создаем переменную, в которую помещаем информацию о нашем боте.
+        //Console.WriteLine($"{me.FirstName} запущен!");
+
+        //await Task.Delay(-1); // Устанавливаем бесконечную задержку, чтобы наш бот работал постоянно
     }
     private static async Task UpdateHandler(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
     {

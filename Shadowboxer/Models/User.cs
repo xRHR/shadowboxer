@@ -12,5 +12,9 @@ namespace Shadowboxer.Models
         [Key]
         public long Id { get; set; }
 
+        public User(long id)
+        {
+            Id = id;
+        }
     }
 }
